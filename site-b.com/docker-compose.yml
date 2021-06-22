@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  site-b.com:
+    image: nginx:latest
+    container_name: 'site-b.com'
+    volumes:
+      - ./server:/var/www
+      - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      VIRTUAL_HOST: 'site-b.com'
+
+networks:
+  default:
+    external:
+      name: shared

@@ -1,0 +1,27 @@
+version: '3'
+services:
+
+  proxy_prod:
+    image: nginx:latest
+    container_name: 'proxy'
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+    restart: always
+
+  proxy_dev:
+    image: nginx:latest
+    container_name: 'proxy'
+    volumes:
+      - ./conf.d/:/etc/nginx/conf.d
+      - ./etc/letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+    restart: always
+
+networks:
+  default:
+    external:
+      name: shared
